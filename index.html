@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minimal ChatBot</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <button class="new-chat-btn" onclick="createNewChat()">
+                <span>+</span> New Chat
+            </button>
+            <input type="text" class="search-input" placeholder="Search conversations..." id="searchChats" oninput="filterChats()">
+        </div>
+        <div class="chat-list" id="chatList"></div>
+    </div>
+
+    <!-- Main Chat Area -->
+    <div class="main-chat">
+        <!-- Header -->
+        <header class="chat-header">
+            <button class="toggle-sidebar" onclick="toggleSidebar()">☰</button>
+            <h1>🤖 ChatBot</h1>
+            <div class="header-actions">
+                <button class="icon-btn" onclick="toggleTheme()" title="Toggle theme">
+                    <span id="themeIcon">🌙</span>
+                </button>
+                <button class="icon-btn" onclick="clearChat()" title="Clear chat">
+                    🗑️
+                </button>
+                <button class="icon-btn" onclick="exportChat()" title="Export chat">
+                    💾
+                </button>
+            </div>
+        </header>
+
+        <!-- Messages Container -->
+        <div class="messages-container" id="messagesContainer">
+            <div class="welcome-message">
+                <div class="welcome-icon">👋</div>
+                <h2>Welcome to ChatBot</h2>
+                <p>I'm a simple chatbot. How can I help you today?</p>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-area">
+            <div class="input-container">
+                <button class="attach-btn" onclick="handleFileUpload()" title="Attach file">
+                    📎
+                    <input type="file" id="fileInput" hidden multiple accept="image/*,.pdf,.txt,.doc,.docx">
+                </button>
+                <button class="emoji-btn" onclick="toggleEmojiPicker()" title="Add emoji">😊</button>
+                <textarea 
+                    id="messageInput" 
+                    placeholder="Type a message..." 
+                    rows="1"
+                    onkeydown="handleKeyPress(event)"
+                    oninput="autoResize(this)"
+                ></textarea>
+                <button class="voice-btn" id="voiceBtn" onclick="startVoiceInput()" title="Voice input">🎤</button>
+                <button class="send-btn" onclick="sendMessage()" title="Send message">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 2L11 13"></path>
+                        <path d="M22 2L15 22L11 13L2 9L22 2Z"></path>
+                    </svg>
+                </button>
+            </div>
+            <!-- Emoji Picker -->
+            <div class="emoji-picker" id="emojiPicker" style="display: none;">
+                <div class="emoji-grid">
+                    😀 😃 😄 😁 😅 😂 🤣 😊 😇 🙂 🙃 😉 😌 😍 🥰 😘 😗 😙 😚 😋 😛 😝 😜 🤪 🤨 🧐 🤓 😎 🤩 🥳 😏 😒 😞 😔 😟 😕 🙁 😣 😖 😫 😩 🥺 😢 😭 😤 😠 😡 🤬 🤯 😳 🥵 🥶 😱 😨 😰 😥 😓 🤗 🤔 🤭 🤫 🤥 😶 😐 😑 😬 🙄 😯 😦 😧 😮 😲 🥱 😴 🤤 😪 😵 🤐 🥴 🤢 🤮 🤧 😷 🤒 🤕 🤑 🤠 😈 👿 👹 👺 🤡 💩 👻 💀 ☠️ 👽 👾 🤖 🎃 😺 😸 😹 😻 😼 😽 🙀 😿 😾
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Typing Indicator Template -->
+    <template id="typingIndicator">
+        <div class="message bot-message typing">
+            <div class="typing-dots">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </template>
+
+    <script src="assets/js/storage.js"></script>
+    <script src="assets/js/voice.js"></script>
+    <script src="assets/js/chat.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>
